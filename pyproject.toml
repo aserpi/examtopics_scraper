@@ -1,0 +1,28 @@
+[project]
+name = "examtopics_scraper"
+description = "Scraper for question discussions on ExamTopics"
+version = "1.0.0"
+authors = [{ name="aserpi" }]
+
+requires-python = ">=3.10"
+dependencies = ["scrapy >= 2.7, <3"]
+
+readme = "README.md"
+license = {file = "LICENSE.txt"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Typing :: Typed",
+]
+
+
+[project.urls]
+"Homepage" = "https://github.com/aserpi/examtopics_scraper"
+"Bug Tracker" = "https://github.com/aserpi/examtopics_scraper/issues"
+
+
+[project.scripts]
+examtopics_scraper = "examtopics_scraper:__main__"
