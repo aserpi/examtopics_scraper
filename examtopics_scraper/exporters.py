@@ -2,6 +2,8 @@ import itemadapter
 
 
 class ExamtopicsExamsExportPipeline:
+    """Stdout exporter for ExamTopics exams."""
+
     def process_item(self, item, spider):
         dict_item = itemadapter.ItemAdapter(item).asdict()
         print(f"{dict_item['code']}{dict_item['name']}")
@@ -9,6 +11,8 @@ class ExamtopicsExamsExportPipeline:
 
 
 class ExamtopicsQuestionsExportPipeline:
+    """Stdout exporter for ExamTopics question discussions."""
+
     def process_item(self, item, spider):
         print(itemadapter.ItemAdapter(item).asdict()['url'])
         return item
@@ -16,6 +20,8 @@ class ExamtopicsQuestionsExportPipeline:
 
 def generate_questions_html_exporter(provider: str, exam: str, output: str):
     class ExamtopicsQuestionsHtmlExportPipeline:
+        """HTML exporter for ExamTopics question discussions."""
+
         def __init__(self):
             self.questions = []
 
@@ -34,6 +40,7 @@ def generate_questions_html_exporter(provider: str, exam: str, output: str):
             self.questions = []
 
         def process_item(self, item, spider):
+            # Cannot print one item at a time because questions are sorted
             self.questions.append(itemadapter.ItemAdapter(item).asdict())
             return item
 

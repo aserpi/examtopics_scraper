@@ -7,6 +7,7 @@ from examtopics_scraper.spiders import ExamtopicsExamsSpider, ExamtopicsQuestion
 
 
 def scrape_exams(provider: str, verbose: bool = False):
+    """Scrape exams on ExamTopics for a given provider."""
     process = scrapy.crawler.CrawlerProcess(settings={
         "ITEM_PIPELINES": {ExamtopicsExamsExportPipeline: 300},
         "LOG_LEVEL": "DEBUG" if verbose else "ERROR"},
@@ -16,6 +17,7 @@ def scrape_exams(provider: str, verbose: bool = False):
 
 
 def scrape_questions(provider: str, exam: str, output: str, verbose: bool = False):
+    """Scrape question discussions on ExamTopics."""
     settings = {"LOG_LEVEL": "DEBUG" if verbose else "ERROR"}
     if output:
         settings["ITEM_PIPELINES"] = {

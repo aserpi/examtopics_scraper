@@ -4,6 +4,8 @@ import scrapy
 
 
 class ExamtopicsExamsSpider(scrapy.Spider):
+    """Spider for ExamTopics exams."""
+
     name = "examtopics_exams"
 
     def __init__(self, provider, *args, **kwargs):
@@ -20,6 +22,8 @@ class ExamtopicsExamsSpider(scrapy.Spider):
 
 
 class ExamtopicsQuestionsSpider(scrapy.Spider):
+    """Spider for ExamTopics question discussions."""
+
     name = "examtopics_questions"
 
     def __init__(self, provider, exam, *args, **kwargs):
