@@ -21,7 +21,8 @@ def generate_questions_html_exporter(provider: str, exam: str, output: str):
 
         def close_spider(self, spider):
             with open(output, "w") as out:
-                print("<html><head><style>table{border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;width:100%}td,th{border:1px solid #ddd;padding:8px}table tr:nth-child(2n){background-color:#f2f2f2}table tr:hover{background-color:#ddd}table th{background-color:#0095eb;color:#fff;padding-bottom:12px;padding-top:12px;text-align:left}</style></head>"
+                print(f"<html><head><title>{provider} {exam}</title>"
+                      "<style>table{border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;width:100%}td,th{border:1px solid #ddd;padding:8px}table tr:nth-child(2n){background-color:#f2f2f2}table tr:hover{background-color:#ddd}table th{background-color:#0095eb;color:#fff;padding-bottom:12px;padding-top:12px;text-align:left}</style></head>"
                       f"<body><h1>{provider} {exam}</h1><table><"
                       f"tr><th>Topic</th><th>Question</th></tr>", file=out)
                 for question in sorted(self.questions, key=lambda q: (q["topic"], q["question"])):
