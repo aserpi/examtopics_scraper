@@ -26,12 +26,13 @@ class ExamtopicsQuestionsSpider(scrapy.Spider):
         super().__init__(*args, **kwargs)
         self.exam = exam
         self.provider = provider
-        self.discussion_regex = re.compile(fr"Exam {self.exam} (.*) question (\d+)", re.IGNORECASE)
+        self.question_regex = re.compile(fr"^\s+Exam {self.exam} (.*) question (\d+)",
+                                         re.IGNORECASE)
         self.start_urls = [f"https://www.examtopics.com/discussions/{self.provider}/"]
 
     def parse(self, response, **kwargs):
         for question in response.css("a.discussion-link"):
-            if match := re.search(self.discussion_regex, question.css("::text").extract_first()):
+            if match := re.search(self.question_regex, question.css("::text").extract_first()):
                 yield {
                     "question": int(match.group(2)),
                     "topic": match.group(1),
