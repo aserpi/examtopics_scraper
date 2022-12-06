@@ -1,3 +1,5 @@
+import os
+
 import itemadapter
 
 
@@ -18,7 +20,9 @@ class ExamtopicsQuestionsExportPipeline:
         return item
 
 
-def generate_questions_html_exporter(provider: str, exam: str, output: str):
+def generate_questions_html_exporter(
+        provider: str, exam: str, output: str | bytes | os.PathLike | int
+        ) -> type:
     class ExamtopicsQuestionsHtmlExportPipeline:
         """HTML exporter for ExamTopics question discussions."""
 
