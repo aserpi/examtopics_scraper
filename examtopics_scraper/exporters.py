@@ -3,7 +3,14 @@ import os
 import itemadapter
 
 
-class ExamtopicsExamsExportPipeline:
+class ScrapyPipeline:
+    """Base Scrapy pipeline item."""
+
+    def process_item(self, item, spider):
+        raise NotImplementedError
+
+
+class ExamtopicsExamsStdoutPipeline(ScrapyPipeline):
     """Stdout exporter for ExamTopics exams."""
 
     def process_item(self, item, spider):
@@ -12,7 +19,7 @@ class ExamtopicsExamsExportPipeline:
         return item
 
 
-class ExamtopicsQuestionsExportPipeline:
+class ExamtopicsQuestionsStdoutPipeline(ScrapyPipeline):
     """Stdout exporter for ExamTopics question discussions."""
 
     def process_item(self, item, spider):
@@ -21,9 +28,8 @@ class ExamtopicsQuestionsExportPipeline:
 
 
 def generate_questions_html_exporter(
-        provider: str, exam: str, output: str | bytes | os.PathLike | int
-        ) -> type:
-    class ExamtopicsQuestionsHtmlExportPipeline:
+        provider: str, exam: str, output: str | bytes | os.PathLike | int) -> type[ScrapyPipeline]:
+    class ExamtopicsQuestionsHtmlPipeline(ScrapyPipeline):
         """HTML exporter for ExamTopics question discussions."""
 
         def __init__(self):
@@ -48,4 +54,4 @@ def generate_questions_html_exporter(
             self.questions.append(itemadapter.ItemAdapter(item).asdict())
             return item
 
-    return ExamtopicsQuestionsHtmlExportPipeline
+    return ExamtopicsQuestionsHtmlPipeline
