@@ -25,4 +25,4 @@ classifiers = [
 
 
 [project.scripts]
-examtopics_scraper = "examtopics_scraper:__main__"
+examtopics_scraper = "examtopics_scraper._run:run"
