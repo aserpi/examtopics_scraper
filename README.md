@@ -1,6 +1,6 @@
 # examtopics_scraper
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/aserpi/examtopics_scraper)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/aserpi/examtopics_scraper/Python%20package)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/aserpi/examtopics_scraper/package.yml)
 ![Python version](https://img.shields.io/badge/python-v3.10+-blue)
 
 _examtopics_scraper_ is a simple scraper for question discussions on ExamTopics.
