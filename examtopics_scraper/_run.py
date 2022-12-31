@@ -22,32 +22,39 @@ def run():
     parser.add_argument("provider", help="exam provider")
     parser.add_argument("-e", "--exam", help="exam code")
     parser.add_argument("-o", "--output", help="output path for question discussions")
-    parser.add_argument("-v", "--verbose", action="store_true", help="enable debug logging")
+    parser.add_argument("-v", "--verbose", action="count", help="enable debug logging")
     args = parser.parse_args()
 
+    if not args.verbose:
+        log_level = "ERROR"
+    elif args.verbose == 1:
+        log_level = "INFO"
+    else:
+        log_level = "DEBUG"
+
     if args.exam:
-        scrape_questions(args.provider, args.exam, args.output, args.verbose)
+        scrape_questions(args.provider, args.exam, args.output, log_level)
     elif args.output:
         print("Cannot save output of provider scraper.")
         sys.exit(64)
     else:
-        scrape_exams(args.provider, args.verbose)
+        scrape_exams(args.provider, log_level)
 
 
-def scrape_exams(provider: str, verbose: bool = False):
+def scrape_exams(provider: str, log_level: str = "ERROR"):
     """Scrape exams on ExamTopics for a given provider."""
     settings: CrawlerSettings = {
         "ITEM_PIPELINES": {ExamtopicsExamsStdoutPipeline: 300},
-        "LOG_LEVEL": "DEBUG" if verbose else "ERROR"
+        "LOG_LEVEL": log_level
     }
     process = scrapy.crawler.CrawlerProcess(settings=settings)
     process.crawl(ExamtopicsExamsSpider, provider=provider)
     process.start()
 
 
-def scrape_questions(provider: str, exam: str, output: str, verbose: bool = False):
+def scrape_questions(provider: str, exam: str, output: str, log_level: str = "ERROR"):
     """Scrape question discussions on ExamTopics."""
-    settings: CrawlerSettings = {"LOG_LEVEL": "DEBUG" if verbose else "ERROR"}
+    settings: CrawlerSettings = {"LOG_LEVEL": log_level}
     if output:
         settings["ITEM_PIPELINES"] = {
             generate_questions_html_exporter(provider, exam, output): 300}
