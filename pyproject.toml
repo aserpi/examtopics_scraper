@@ -1,7 +1,7 @@
 [project]
 name = "examtopics_scraper"
 description = "Scraper for question discussions on ExamTopics"
-version = "1.0.1"
+version = "1.1.0"
 authors = [{ name="aserpi" }]
 
 requires-python = ">=3.10"
